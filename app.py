@@ -6,8 +6,6 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.express as px
 
-import datetime
-
 # Creating the app
 app = dash.Dash(__name__)
 
@@ -35,16 +33,9 @@ def main():
     fig = update_figure(0)
 
     # Creating the layout
-    app.layout = html.Div([
-        html.H1(
-            "Book's R Kewl!", 
-            style={"font-family": "Arial", "font-size": "36px"}
-        ),
-        dcc.Graph(id="bar-graph", figure=fig),
-        refresh_button
-    ])
+    app.layout = html.Div(dcc.Graph(id="bar-graph", figure=fig))
 
-    app.run_server(debug=True)
+    app.run_server(debug=False, host='0.0.0.0')
 
 # Running the app
 if __name__ == "__main__":
