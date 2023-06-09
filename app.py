@@ -31,21 +31,8 @@ def update_figure(n):
         orientation='h',
     )
 
-@app.callback(
-    Output("my-timestamp", "children"), # The output is the children of the timestamp div
-    Input("my-location", "pathname") # The input is the pathname of the location component
-)
-def update_timestamp(pathname):
-    # Get the current date and time as a string
-    # You can format it according to your preference
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # Return a message with the current date and time
-    return f"Page refreshed on {now}"
-
 def main():
     fig = update_figure(0)
-
-    timestamp = html.Div(id="my-timestamp") # This component will display the current date and time
 
     # Creating the layout
     app.layout = html.Div([
@@ -54,11 +41,10 @@ def main():
             style={"font-family": "Arial", "font-size": "36px"}
         ),
         dcc.Graph(id="bar-graph", figure=fig),
-        timestamp,
         refresh_button
     ])
 
-    app.run_server()
+    app.run_server(debug=True)
 
 # Running the app
 if __name__ == "__main__":
